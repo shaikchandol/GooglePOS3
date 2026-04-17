@@ -1,0 +1,22 @@
+Component,Layer,ShapeType,Description,Connections
+Identity Module,Application,Box,User management and authentication,Catalog[In-Process];Sales[In-Process];Inventory[In-Process]
+Catalog Module,Application,Box,Product and category management,Identity[In-Process];Sales[In-Process];Inventory[In-Process]
+Inventory Module,Application,Box,Stock levels and multi-location tracking,Catalog[In-Process];Sales[In-Process]
+Sales Module,Application,Box,Transaction processing and checkout,Inventory[In-Process];Catalog[In-Process];Identity[In-Process]
+Reporting Module,Application,Box,Cross-module data analytics,Catalog[In-Process];Sales[In-Process];Inventory[In-Process]
+Shared Kernel,Core,Hexagon,Common abstractions and core logic,All Modules
+MediatR Bus,Infrastructure,Cylinder,In-process message bus,All Modules
+PostgreSQL,Data,Database,Central persistent storage,All Modules
+API Host,Infrastructure,Diamond,Web server and global routes,All Modules
+Tenant Middleware,Cross-Cutting,Rectangle,Multi-tenancy context resolver,API Host;All Modules
+
+# Connector Matrix (Source -> Target -> Type)
+Source,Target,Type,Description
+API Host,Tenant Middleware,Pipeline,Resolves tenant context
+API Host,Modules,REST,Routes requests to specific module
+Catalog Module,MediatR Bus,Event,Publishes ProductUpdated event
+MediatR Bus,Inventory Module,Notification,Handles ProductUpdated (sync stock)
+Sales Module,MediatR Bus,Event,Publishes OrderPlaced event
+MediatR Bus,Inventory Module,Notification,Handles OrderPlaced (decrement stock)
+Modules,Shared Kernel,Reference,Inherits base types
+Modules,PostgreSQL,EF Core,Owns specific table sets

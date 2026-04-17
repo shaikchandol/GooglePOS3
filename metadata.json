@@ -1,0 +1,6 @@
+{
+  "name": "Modular Retail POS",
+  "description": "A cloud-agnostic, multi-tenant modular monolith for retail point-of-sale systems, built with .NET principles.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Theme Specific Colors */
+  --bg-primary: #f8fafc;
+  --bg-sidebar: #1e293b;
+  --accent-blue: #3b82f6;
+  --border-subtle: #e2e8f0;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --card-bg: #ffffff;
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--bg-primary)] text-[var(--text-main)] font-sans antialiased h-screen overflow-hidden;
+  }
+}
+
+@layer components {
+  .nav-item {
+    @apply px-4 py-3 mb-1 rounded-md text-[0.85rem] cursor-pointer transition-colors text-[#cbd5e1] hover:bg-white/5;
+  }
+  .nav-item-active {
+    @apply bg-[var(--accent-blue)] text-white hover:bg-[var(--accent-blue)];
+  }
+  .card {
+    @apply bg-[var(--card-bg)] border border-[var(--border-subtle)] rounded-lg p-5 flex flex-col shadow-sm;
+  }
+  .card-label {
+    @apply text-[0.65rem] uppercase font-bold tracking-wider text-[var(--text-muted)] mb-3;
+  }
+  .btn {
+    @apply px-3 py-1.5 text-[0.75rem] font-medium rounded border border-[var(--border-subtle)] bg-white hover:bg-gray-50 transition-colors cursor-pointer;
+  }
+  .btn-primary {
+    @apply bg-[var(--accent-blue)] text-white border-none hover:bg-blue-600;
+  }
+  .module-box {
+    @apply border border-[var(--border-subtle)] bg-white p-3 text-center text-[0.8rem] font-semibold rounded shadow-[0_2px_4px_rgba(0,0,0,0.02)];
+  }
+}
